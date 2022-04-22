@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.andyapp.presentation.main.MainFragment"
+        android:label="UNIDEP"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailTopicFragment"
+            app:destination="@id/detailTopicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.andyapp.presentation.quiz.QuizFragment"
+        tools:layout="@layout/fragment_quizz">
+
+        <argument
+            android:name="topic"
+            app:argType="com.example.andyapp.data.models.Topic" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailTopicFragment"
+        android:name="com.example.andyapp.presentation.detail.DetailTopicFragment"
+        tools:layout="@layout/fragment_detail_topic">
+        <argument
+            android:name="topic"
+            app:argType="com.example.andyapp.data.models.Topic" />
+        <action
+            android:id="@+id/action_detailTopicFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
+</navigation>

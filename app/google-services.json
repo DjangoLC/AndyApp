@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "430942612501",
+    "project_id": "andyapp-35b43",
+    "storage_bucket": "andyapp-35b43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430942612501:android:e851f5c6c0b0abee96721c",
+        "android_client_info": {
+          "package_name": "com.example.andyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430942612501-r6829o5ame7tsnhtmh4k2ut671effm9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL2T6hiZJabkRM8mDlrRO9duSv0c7ohEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430942612501-r6829o5ame7tsnhtmh4k2ut671effm9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
