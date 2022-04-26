@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2
 import com.example.andyapp.R
 import com.example.andyapp.databinding.FragmentQuizzBinding
 import com.example.andyapp.presentation.ViewModelFactory
@@ -15,14 +17,18 @@ class QuizFragment : Fragment(R.layout.fragment_quizz) {
 
     private lateinit var binding: FragmentQuizzBinding
 
-    private val fragmentAdapter: FragmentAdapter by lazy {
-        FragmentAdapter(this)
-    }
+    private var fragmentAdapter: FragmentAdapter? = null
 
     private val factory = ViewModelFactory()
 
-    private val quizVieModel: QuizViewModel by viewModels() {
+    private val quizVieModel: QuizViewModel by activityViewModels() {
         factory
+    }
+
+    private val viewPagerCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            quizVieModel.setCurrentPage(position)
+        }
     }
 
     private val args: QuizFragmentArgs by navArgs()
@@ -39,11 +45,38 @@ class QuizFragment : Fragment(R.layout.fragment_quizz) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        quizVieModel.setTopic(args.topic)
         val questions = args.topic.quiz.map {
             QuestionFragment(it)
         }
-        fragmentAdapter.fragments = questions
-        binding.container.adapter = fragmentAdapter
+        fragmentAdapter = FragmentAdapter(this)
+        fragmentAdapter?.fragments = questions
+        binding.viewpager.apply {
+            adapter = fragmentAdapter
+            isUserInputEnabled = false
+        }
+        binding.viewpager.registerOnPageChangeCallback(viewPagerCallback)
+        observe()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fragmentAdapter = null
+        binding.viewpager.adapter = null
+        binding.viewpager.unregisterOnPageChangeCallback(viewPagerCallback)
+    }
+
+    private fun observe() {
+        quizVieModel.onScoreScreen().observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                findNavController().navigate(R.id.action_quizFragment_to_scoreFragment)
+            }
+        }
+        quizVieModel.onNextQuestion().observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                binding.viewpager.currentItem = binding.viewpager.currentItem + 1
+            }
+        }
     }
 
 }

@@ -66,4 +66,7 @@ dependencies {
     implementation "com.pdftron:pdftron:9.2.1"
     implementation "com.pdftron:tools:9.2.1"
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.9.0'
 }

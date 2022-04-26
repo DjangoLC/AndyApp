@@ -14,6 +14,7 @@ class TopicsViewModel(private val topicRepository: QuestionsRepository) : ViewMo
     private val _topics = MutableLiveData<List<Topic>>()
 
     fun setup() {
+        //createTopic()
         getTopics()
     }
 
@@ -38,86 +39,15 @@ class TopicsViewModel(private val topicRepository: QuestionsRepository) : ViewMo
                             "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
                             "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
                         )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
+                    ),
+                    Quiz(
+                        question = "Pregunta enfocada a iniciativa ",
                         answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
                         possibleAnswers = listOf(
                             "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
+                            "¿Cuándo fue la última ocasión en que de forma circunstancial tuvo que tomar el control o dirigir un grupo?",
                             "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
-                        )
-                    ),Quiz(
-                        question = "Pregunta enfocada a resistencia",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                            "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina"
+                            "Mencione un ejemplo de algo que haya hecho por encima de lo que su trabajo le exigía"
                         )
                     )
                 )

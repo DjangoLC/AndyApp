@@ -1,19 +1,20 @@
 package com.example.andyapp.presentation.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.andyapp.R
+import com.example.andyapp.data.models.Quiz
+import com.example.andyapp.data.models.Topic
 import com.example.andyapp.databinding.FragmentMainBinding
-import com.example.andyapp.databinding.FragmentRegisterBinding
 import com.example.andyapp.presentation.ViewModelFactory
-import com.example.andyapp.presentation.login.RegisterViewModel
+import com.google.gson.Gson
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -50,12 +51,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             layoutManager = lm
         }
 
+        binding.btnAdmin.setOnClickListener {
+            findNavController().navigate(R.id.adminFragment)
+        }
+
         topicViewModel.setup()
 
         topicViewModel.onTopics().observe(viewLifecycleOwner) {
             topicAdapter.topics = it
         }
-
     }
 
 }
