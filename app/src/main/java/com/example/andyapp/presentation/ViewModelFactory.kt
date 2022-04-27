@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.andyapp.data.LoginRepository
 import com.example.andyapp.data.QuestionsRepository
+import com.example.andyapp.presentation.admin.AdminViewModel
 import com.example.andyapp.presentation.login.RegisterViewModel
 import com.example.andyapp.presentation.main.TopicsViewModel
 import com.example.andyapp.presentation.quiz.QuizViewModel
@@ -25,6 +26,10 @@ class ViewModelFactory : ViewModelProvider.Factory {
 
         if (modelClass.isAssignableFrom(QuizViewModel::class.java)) {
             return QuizViewModel() as T
+        }
+
+        if (modelClass.isAssignableFrom(AdminViewModel::class.java)) {
+            return AdminViewModel(topicRepository) as T
         }
 
         throw Exception("cant create view model: ${modelClass.canonicalName}")

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.andyapp">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +14,8 @@
         android:theme="@style/Theme.AndyApp">
         <meta-data
             android:name="pdftron_license_key"
-            android:value="${pdftronLicenseKey}"/>
+            android:value="${pdftronLicenseKey}" />
+
         <activity
             android:name=".presentation.LoginActivity"
             android:exported="true">

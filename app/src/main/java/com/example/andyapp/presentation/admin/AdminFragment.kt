@@ -4,22 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import com.example.andyapp.R
-import com.example.andyapp.data.QuestionsRepository
 import com.example.andyapp.databinding.FragmentAdminBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.andyapp.presentation.ViewModelFactory
+import com.example.andyapp.presentation.setupWithAdapter
 
 class AdminFragment : Fragment(R.layout.fragment_admin) {
 
     private lateinit var binding: FragmentAdminBinding
 
-    private val repository: QuestionsRepository by lazy {
-        QuestionsRepository()
+    private val factory = ViewModelFactory()
+
+    private val adminViewModel: AdminViewModel by viewModels {
+        factory
     }
 
     override fun onCreateView(
@@ -34,23 +34,50 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            val data = repository.getTopics()
+        adminViewModel.getTopics()
+        observe()
+        binding.btnSave.setOnClickListener {
+            adminViewModel.saveQuestion(
+                binding.tilQuestion.text.toString(),
+                binding.tilCorrectAnswer.text.toString(),
+                listOf(
+                    binding.tilPossibleAnswer1.text.toString(),
+                    binding.tilPossibleAnswer2.text.toString(),
+                    binding.tilPossibleAnswer3.text.toString(),
+                    binding.tilPossibleAnswer4.text.toString()
+                )
+            )
+        }
 
-            withContext(Dispatchers.Main) {
+    }
 
-                val items = data.map {
-                    it.title
-                }
-                val adapter = ArrayAdapter(requireContext(),  android.R.layout.simple_spinner_dropdown_item, items)
-                binding.tvAutoComplete.setAdapter(adapter)
+    private fun observe() {
+        adminViewModel.onGetTopics().observe(viewLifecycleOwner) {
+            binding.tvAutoComplete.setupWithAdapter(it) { id ->
+                adminViewModel.setId(id)
             }
         }
-
-        binding.btnSave.setOnClickListener {
-
+        adminViewModel.onQuestionSaved().observe(viewLifecycleOwner) {
+            if (it) {
+                clearFields()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "something was wrong please try later!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
+    }
 
+    private fun clearFields() {
+        binding.tilQuestion.setText("")
+        binding.tilCorrectAnswer.setText("")
+        binding.tilPossibleAnswer1.setText("")
+        binding.tilPossibleAnswer2.setText("")
+        binding.tilPossibleAnswer3.setText("")
+        binding.tilPossibleAnswer4.setText("")
+        binding.tvAutoComplete.setText("")
     }
 
 }

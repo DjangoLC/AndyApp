@@ -79,56 +79,6 @@ class TopicsViewModel(private val topicRepository: QuestionsRepository) : ViewMo
                             "¿Cuándo fue la última vez que experimentó la sensación de que parte de la información que usted maneja fue mal interpretada por otra persona?",
                             "¿Recuerda haber tenido algún reconocimiento diferente al de sus compañeros por el cumplimiento de un trabajo?"
                         )
-                    ),
-                    Quiz(
-                        question = "Pregunta enfocada a iniciativa ",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Cuándo fue la última ocasión en que de forma circunstancial tuvo que tomar el control o dirigir un grupo?",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Mencione un ejemplo de algo que haya hecho por encima de lo que su trabajo le exigía"
-                        )
-                    ),
-                    Quiz(
-                        question = "Pregunta enfocada a iniciativa ",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Cuándo fue la última ocasión en que de forma circunstancial tuvo que tomar el control o dirigir un grupo?",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Mencione un ejemplo de algo que haya hecho por encima de lo que su trabajo le exigía"
-                        )
-                    ),
-                    Quiz(
-                        question = "Pregunta enfocada a iniciativa ",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Cuándo fue la última ocasión en que de forma circunstancial tuvo que tomar el control o dirigir un grupo?",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Mencione un ejemplo de algo que haya hecho por encima de lo que su trabajo le exigía"
-                        )
-                    ),
-                    Quiz(
-                        question = "Pregunta enfocada a iniciativa ",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Cuándo fue la última ocasión en que de forma circunstancial tuvo que tomar el control o dirigir un grupo?",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Mencione un ejemplo de algo que haya hecho por encima de lo que su trabajo le exigía"
-                        )
-                    ),
-                    Quiz(
-                        question = "Pregunta enfocada a iniciativa ",
-                        answer = "Hábleme de tres actividades que haya desempeñado por espacios largos de tiempo, que hayan requerido esfuerzo y disciplina",
-                        possibleAnswers = listOf(
-                            "Platíqueme de la última ocasión en que dijo una opinión diferente a la de su jefe",
-                            "¿Cuándo fue la última ocasión en que de forma circunstancial tuvo que tomar el control o dirigir un grupo?",
-                            "¿Recuerda alguna situación en la que haya convertido un problema en un reto o una oportunidad?",
-                            "Mencione un ejemplo de algo que haya hecho por encima de lo que su trabajo le exigía"
-                        )
                     )
                 )
             )
@@ -136,36 +86,21 @@ class TopicsViewModel(private val topicRepository: QuestionsRepository) : ViewMo
             topicRepository.createQuestion(
                 title = "Entrevista para Auxiliar de Recursos Humanos.",
                 quiz = listOf(
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
+
                 )
             )
 
             topicRepository.createQuestion(
                 title = "Entrevista para Ejecutivo de Ventas.",
                 quiz = listOf(
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
+
                 )
             )
 
             topicRepository.createQuestion(
                 title = "Supervisor de Construcción.",
                 quiz = listOf(
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
-                    Quiz(),
+
                 )
             )
         }

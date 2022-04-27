@@ -1,12 +1,12 @@
 package com.example.andyapp.data
 
-import android.util.Log
 import com.example.andyapp.data.models.Quiz
 import com.example.andyapp.data.models.Topic
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
+
 
 class QuestionsRepository {
 
@@ -29,16 +29,34 @@ class QuestionsRepository {
                 }
         }
 
-    suspend fun getTopics() : List<Topic> = suspendCancellableCoroutine { continuation ->
+    suspend fun getTopics(): List<Topic> = suspendCancellableCoroutine { continuation ->
         db.collection(TOPICS_COLLECTION)
             .get()
             .addOnSuccessListener { task ->
-                val topics = task.toObjects(Topic::class.java)
+                val topics = mutableListOf<Topic>()
+                task.documents.forEach {
+                    val topic = it.toObject<Topic>()
+                    topic?.id = it.id
+                    topic?.let { topics.add(topic) }
+                }
                 continuation.resume(topics)
             }
             .addOnFailureListener {
                 continuation.resume(emptyList())
             }
     }
+
+    suspend fun createQuestionByTopic(documentId: String, questions: List<Quiz>): Boolean =
+        suspendCancellableCoroutine { continuation ->
+            db.collection(TOPICS_COLLECTION)
+                .document(documentId)
+                .update("quiz",questions)
+                .addOnSuccessListener {
+                    continuation.resume(true)
+                }
+                .addOnFailureListener {
+                    continuation.resume(true)
+                }
+        }
 
 }
