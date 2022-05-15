@@ -54,4 +54,9 @@
             app:popUpToInclusive="true"
             app:popUpTo="@id/mainFragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.example.andyapp.presentation.results.ResultsFragment"
+        android:label="Results"
+        tools:layout="@layout/fragment_results" />
 </navigation>

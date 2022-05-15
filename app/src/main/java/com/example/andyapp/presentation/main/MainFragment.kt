@@ -13,10 +13,11 @@ import com.example.andyapp.R
 import com.example.andyapp.data.models.Quiz
 import com.example.andyapp.data.models.Topic
 import com.example.andyapp.databinding.FragmentMainBinding
+import com.example.andyapp.presentation.BaseFragment
 import com.example.andyapp.presentation.ViewModelFactory
 import com.google.gson.Gson
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
 
@@ -26,8 +27,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             findNavController().navigate(action)
         }
     }
-
-    private val factory = ViewModelFactory()
 
     private val topicViewModel: TopicsViewModel by viewModels() {
         factory
@@ -53,6 +52,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         binding.btnAdmin.setOnClickListener {
             findNavController().navigate(R.id.adminFragment)
+        }
+
+        binding.btnLog.setOnClickListener {
+            findNavController().navigate(R.id.resultsFragment)
         }
 
         topicViewModel.setup()

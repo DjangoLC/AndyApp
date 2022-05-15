@@ -7,19 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.andyapp.R
 import com.example.andyapp.databinding.FragmentScoreBinding
+import com.example.andyapp.presentation.BaseFragment
 import com.example.andyapp.presentation.ViewModelFactory
 import com.example.andyapp.presentation.quiz.QuizViewModel
+import com.example.andyapp.presentation.results.ResultsViewModel
 
-class ScoreFragment : Fragment(R.layout.fragment_score) {
+class ScoreFragment : BaseFragment(R.layout.fragment_score) {
 
     private lateinit var scoreBinding: FragmentScoreBinding
 
-    private val factory = ViewModelFactory()
-
     private val quizVieModel: QuizViewModel by activityViewModels() {
+        factory
+    }
+
+    private val resultViewModel: ResultsViewModel by viewModels {
         factory
     }
 
@@ -45,6 +50,7 @@ class ScoreFragment : Fragment(R.layout.fragment_score) {
             quizVieModel.reset()
             findNavController().navigate(R.id.action_scoreFragment_to_mainFragment)
         }
+        resultViewModel.saveResult(quizVieModel.getScore())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

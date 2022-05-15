@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.andyapp.data.models.Quiz
 import com.example.andyapp.data.models.Topic
+import com.example.andyapp.presentation.BaseViewModel
 import com.example.andyapp.presentation.Event
 
-class QuizViewModel : ViewModel() {
+class QuizViewModel : BaseViewModel() {
 
     private lateinit var quiz: Quiz
 

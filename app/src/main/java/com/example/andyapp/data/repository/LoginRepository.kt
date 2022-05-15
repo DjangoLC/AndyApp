@@ -1,27 +1,28 @@
-package com.example.andyapp.data
+package com.example.andyapp.data.repository
 
+import com.example.andyapp.data.Register
 import com.example.andyapp.data.models.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class LoginRepository {
+object LoginRepository {
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    companion object {
-        const val USERS = "users"
+    private var currentUser: User? = null
 
-        //REGISTER
-        const val NAME = "name"
-        const val USER_NAME = "username"
-        const val ADDRESS = "address"
-        const val COUNTRY = "country"
-        const val PHONE = "phone"
-        const val EMAIL = "email"
-        const val PASSWORD = "password"
 
-    }
+    const val USERS = "users"
+
+    //REGISTER
+    const val NAME = "name"
+    const val USER_NAME = "username"
+    const val ADDRESS = "address"
+    const val COUNTRY = "country"
+    const val PHONE = "phone"
+    const val EMAIL = "email"
+    const val PASSWORD = "password"
 
     suspend fun register(
         name: String,
@@ -53,7 +54,7 @@ class LoginRepository {
     }
 
     suspend fun verifyUniqueUser(username: String, pass: String): Register {
-        return if (login(username, pass)) {
+        return if (login(username, pass) != null) {
             Register.ALREADY_EXIST
         } else {
             Register.AVAILABLE
@@ -61,20 +62,27 @@ class LoginRepository {
     }
 
 
-    suspend fun login(username: String, pass: String): Boolean =
+    suspend fun login(username: String, pass: String): User? =
         suspendCancellableCoroutine { continuation ->
             db.collection(USERS)
                 .get()
                 .addOnCompleteListener { task ->
                     val users = task.result.toObjects(User::class.java)
                     users.find { it.username == username && it.password == pass }?.let {
-                        continuation.resume(true)
+                        currentUser = it
+                        continuation.resume(it)
                     } ?: kotlin.run {
-                        continuation.resume(false)
+                        continuation.resume(null)
                     }
                 }
                 .addOnFailureListener {
-                    continuation.resume(false)
+                    continuation.resume(null)
                 }
         }
+
+    fun setUser(user: User) {
+        this.currentUser = user
+    }
+
+    fun getCurrentUser(): User? = currentUser
 }

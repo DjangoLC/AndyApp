@@ -10,13 +10,12 @@ import androidx.fragment.app.activityViewModels
 import com.example.andyapp.R
 import com.example.andyapp.data.models.Quiz
 import com.example.andyapp.databinding.FragmentQuestionBinding
+import com.example.andyapp.presentation.BaseFragment
 import com.example.andyapp.presentation.ViewModelFactory
 
-class QuestionFragment(private val quiz: Quiz) : Fragment(R.layout.fragment_question) {
+class QuestionFragment(private val quiz: Quiz) : BaseFragment(R.layout.fragment_question) {
 
     private lateinit var binding: FragmentQuestionBinding
-
-    private val factory = ViewModelFactory()
 
     private val quizVieModel: QuizViewModel by activityViewModels() {
         factory

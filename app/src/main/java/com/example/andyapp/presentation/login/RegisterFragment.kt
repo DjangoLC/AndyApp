@@ -10,13 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.andyapp.R
 import com.example.andyapp.databinding.FragmentRegisterBinding
+import com.example.andyapp.presentation.BaseFragment
 import com.example.andyapp.presentation.ViewModelFactory
 import com.example.andyapp.presentation.isVisible
 
 
-class RegisterFragment : Fragment(R.layout.fragment_register) {
-
-    private val factory = ViewModelFactory()
+class RegisterFragment : BaseFragment(R.layout.fragment_register) {
 
     private val registerViewModel: RegisterViewModel by viewModels() {
         factory

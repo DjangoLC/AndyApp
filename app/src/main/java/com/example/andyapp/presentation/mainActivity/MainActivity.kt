@@ -1,6 +1,10 @@
-package com.example.andyapp.presentation
+package com.example.andyapp.presentation.mainActivity
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
@@ -9,6 +13,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.andyapp.R
+import com.example.andyapp.presentation.ViewModelFactory
+import com.example.andyapp.presentation.login.LoginFragment
+import com.google.firebase.firestore.auth.User
 
 class MainActivity : AppCompatActivity() {
 

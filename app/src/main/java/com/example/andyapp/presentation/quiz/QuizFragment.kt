@@ -11,15 +11,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.andyapp.R
 import com.example.andyapp.databinding.FragmentQuizzBinding
+import com.example.andyapp.presentation.BaseFragment
 import com.example.andyapp.presentation.ViewModelFactory
 
-class QuizFragment : Fragment(R.layout.fragment_quizz) {
+class QuizFragment : BaseFragment(R.layout.fragment_quizz) {
 
     private lateinit var binding: FragmentQuizzBinding
 
     private var fragmentAdapter: FragmentAdapter? = null
-
-    private val factory = ViewModelFactory()
 
     private val quizVieModel: QuizViewModel by activityViewModels() {
         factory

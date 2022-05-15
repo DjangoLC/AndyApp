@@ -9,14 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.andyapp.R
 import com.example.andyapp.databinding.FragmentAdminBinding
+import com.example.andyapp.presentation.BaseFragment
 import com.example.andyapp.presentation.ViewModelFactory
 import com.example.andyapp.presentation.setupWithAdapter
 
-class AdminFragment : Fragment(R.layout.fragment_admin) {
+class AdminFragment : BaseFragment(R.layout.fragment_admin) {
 
     private lateinit var binding: FragmentAdminBinding
-
-    private val factory = ViewModelFactory()
 
     private val adminViewModel: AdminViewModel by viewModels {
         factory

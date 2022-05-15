@@ -1,6 +1,7 @@
-package com.example.andyapp.data
+package com.example.andyapp.data.repository
 
 import com.example.andyapp.data.models.Quiz
+import com.example.andyapp.data.models.Score
 import com.example.andyapp.data.models.Topic
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -14,6 +15,7 @@ class QuestionsRepository {
 
     companion object {
         const val TOPICS_COLLECTION = "topics"
+        const val RESULTS_COLLECTION = "results"
     }
 
     suspend fun createQuestion(title: String, quiz: List<Quiz>): Boolean =
@@ -50,7 +52,7 @@ class QuestionsRepository {
         suspendCancellableCoroutine { continuation ->
             db.collection(TOPICS_COLLECTION)
                 .document(documentId)
-                .update("quiz",questions)
+                .update("quiz", questions)
                 .addOnSuccessListener {
                     continuation.resume(true)
                 }
@@ -59,4 +61,25 @@ class QuestionsRepository {
                 }
         }
 
+    suspend fun getResults(): List<Score> = suspendCancellableCoroutine { continuation ->
+        db.collection(RESULTS_COLLECTION)
+            .get()
+            .addOnSuccessListener {
+                continuation.resume(it.toObjects(Score::class.java))
+            }
+            .addOnFailureListener {
+                continuation.resume(emptyList())
+            }
+    }
+
+    suspend fun saveScore(score: Score): Boolean = suspendCancellableCoroutine { continuation ->
+        db.collection(RESULTS_COLLECTION)
+            .add(score)
+            .addOnSuccessListener {
+                continuation.resume(true)
+            }
+            .addOnFailureListener {
+                continuation.resume(false)
+            }
+    }
 }

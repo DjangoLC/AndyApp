@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.andyapp.data.QuestionsRepository
+import com.example.andyapp.data.repository.QuestionsRepository
 import com.example.andyapp.data.models.Quiz
 import com.example.andyapp.data.models.Topic
+import com.example.andyapp.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
-class TopicsViewModel(private val topicRepository: QuestionsRepository) : ViewModel() {
+class TopicsViewModel(private val topicRepository: QuestionsRepository) : BaseViewModel() {
 
     private val _topics = MutableLiveData<List<Topic>>()
 

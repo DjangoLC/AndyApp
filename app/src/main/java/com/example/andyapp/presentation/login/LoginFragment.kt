@@ -2,55 +2,70 @@ package com.example.andyapp.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.andyapp.R
-import com.example.andyapp.data.LoginRepository
-import com.example.andyapp.presentation.MainActivity
-import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.launch
+import com.example.andyapp.databinding.FragmentLoginBinding
+import com.example.andyapp.presentation.BaseFragment
+import com.example.andyapp.presentation.mainActivity.MainActivity
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
-    private val repository: LoginRepository by lazy {
-        LoginRepository()
+    private val registerViewModel: RegisterViewModel by viewModels() {
+        factory
+    }
+
+    private lateinit var binding: FragmentLoginBinding
+
+    companion object {
+        const val USER = "user"
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.btnRegister).setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             findNavController().navigate(R.id.registerFragment)
         }
-        view.findViewById<Button>(R.id.btnLogin).setOnClickListener {
-            lifecycleScope.launch {
-                val result = repository.login(
-                    view.findViewById<TextInputEditText>(R.id.tieUserName).text.toString(),
-                    view.findViewById<TextInputEditText>(R.id.tiePass).text.toString()
-                )
+        binding.btnLogin.setOnClickListener {
+            registerViewModel.login(
+                binding.tieUserName.text.toString(),
+                binding.tiePass.text.toString()
+            )
+        }
+        binding.tiePass.addTextChangedListener(
+            PasswordWatcher(
+                listOf(Validations.CHARACTER, Validations.UPPERCASE),
+                object: PasswordWatcher.PasswordListener {
+                    override fun onValidate(type: Validations?, isValid: Boolean?) {
+                        Log.e("TAG", "$type is valid: $isValid")
+                    }
 
-                if (result) {
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-
-                } else {
-                    Toast.makeText(requireContext(), "Error login", Toast.LENGTH_SHORT).show()
                 }
+            )
+        )
+        observe()
+    }
 
-            }
+    private fun observe() {
+        registerViewModel.onLoginSuccess().observe(viewLifecycleOwner) {
+            startActivity(Intent(requireContext(), MainActivity::class.java))
+        }
+        registerViewModel.onLoginError().observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Error login", Toast.LENGTH_SHORT).show()
         }
     }
 

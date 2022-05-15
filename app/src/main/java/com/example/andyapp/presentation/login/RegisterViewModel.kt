@@ -4,13 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.andyapp.data.LoginRepository
+import com.example.andyapp.data.repository.LoginRepository
 import com.example.andyapp.data.Register
+import com.example.andyapp.data.models.User
+import com.example.andyapp.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val repository: LoginRepository) : ViewModel() {
+class RegisterViewModel(private val repository: LoginRepository) : BaseViewModel() {
 
     private val _state = MutableLiveData<RegisterState>()
+    private val login = MutableLiveData<User>()
+    private val onLoginError = MutableLiveData<Unit>()
 
     fun doRegister(
         name: String,
@@ -96,11 +100,33 @@ class RegisterViewModel(private val repository: LoginRepository) : ViewModel() {
 
             }
         }
+
+
+
+    }
+
+    fun login(username: String, pass: String) {
+        viewModelScope.launch {
+            val result = repository.login(
+                username, pass
+            )
+            if (result!=null) {
+                login.value = result!!
+                user = result
+            } else {
+                onLoginError.value = Unit
+            }
+
+        }
     }
 
     fun state(): LiveData<RegisterState> = _state
+    fun onLoginSuccess(): LiveData<User> = login
+    fun onLoginError(): LiveData<Unit> = onLoginError
 
 }
+
+
 
 sealed class RegisterState() {
     object Loading : RegisterState()

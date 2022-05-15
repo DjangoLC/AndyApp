@@ -1,5 +1,7 @@
 package com.example.andyapp.data.models
 
+import java.io.Serializable
+
 data class User(
     val name: String,
     val username: String,
@@ -8,7 +10,7 @@ data class User(
     val phone: String,
     val email: String,
     val password: String
-) {
+) : Serializable {
     constructor() : this(
         name = "",
         username = "",

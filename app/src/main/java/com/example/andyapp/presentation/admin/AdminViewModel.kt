@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.andyapp.data.QuestionsRepository
+import com.example.andyapp.data.repository.QuestionsRepository
 import com.example.andyapp.data.models.Quiz
 import com.example.andyapp.data.models.Topic
+import com.example.andyapp.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
-class AdminViewModel(private val repository: QuestionsRepository) : ViewModel() {
+class AdminViewModel(private val repository: QuestionsRepository) : BaseViewModel() {
 
     private val topics = MutableLiveData<List<Topic>>()
     private val questionSaved = MutableLiveData<Boolean>()
